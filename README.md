@@ -93,7 +93,358 @@ git --version
 ```
 
 ---
+---
 
+#Análisis del Makefile de ejemplo
+
+Como parte de la actividad se reprodujo el ejercicio base proporcionado en clase, el cual consiste en un programa en C con un Makefile que automatiza compilación, ejecución y limpieza.
+
+## Código fuente (`main.c`)
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    printf("Hola desde un ejemplo basico de Makefile.\n");
+    printf("Este programa fue compilado y ejecutado con make.\n");
+    return 0;
+}
+```
+
+Este programa tiene como objetivo mostrar un mensaje simple en consola para comprobar que el proceso de compilación y ejecución mediante `make` funciona correctamente.
+
+---
+
+## Código del Makefile
+
+```make
+CC = gcc
+CFLAGS = -Wall -Wextra -O2
+TARGET = hola
+SRCS = main.c
+OBJS = $(SRCS:.c=.o)
+
+.PHONY: all run clean help rebuild
+
+all: $(TARGET)
+
+help:
+	@echo "Objetivos disponibles:"
+	@echo "  make         -> compila el programa"
+	@echo "  make run     -> compila y ejecuta"
+	@echo "  make clean   -> elimina archivos generados"
+	@echo "  make rebuild -> limpia y vuelve a compilar"
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $@
+
+run: $(TARGET)
+	./$(TARGET)
+
+clean:
+	rm -f $(OBJS) $(TARGET)
+
+rebuild: clean all
+```
+
+---
+
+## Explicación del Makefile
+
+### Variables
+
+| Variable | Función |
+|----------|---------|
+| `CC` | Define el compilador a utilizar (`gcc`) |
+| `CFLAGS` | Configura opciones de compilación |
+| `TARGET` | Nombre del ejecutable final |
+| `SRCS` | Archivos fuente |
+| `OBJS` | Archivos objeto generados |
+
+### Explicación detallada
+
+#### `CC = gcc`
+
+Define el compilador del proyecto:
+
+```make
+CC = gcc
+```
+
+Esto evita repetir el nombre del compilador en múltiples partes.
+
+---
+
+#### `CFLAGS = -Wall -Wextra -O2`
+
+Establece opciones para compilación:
+
+```make
+CFLAGS = -Wall -Wextra -O2
+```
+
+- `-Wall`: activa advertencias generales.
+- `-Wextra`: advertencias adicionales.
+- `-O2`: optimización del código.
+
+Estas opciones ayudan a mejorar calidad y rendimiento.
+
+---
+
+#### `TARGET = hola`
+
+Define el ejecutable:
+
+```make
+TARGET = hola
+```
+
+El programa compilado se llamará `hola`.
+
+---
+
+#### `SRCS = main.c`
+
+Especifica archivos fuente:
+
+```make
+SRCS = main.c
+```
+
+---
+
+#### `OBJS = $(SRCS:.c=.o)`
+
+Genera archivos objeto automáticamente:
+
+```make
+OBJS = $(SRCS:.c=.o)
+```
+
+Convierte:
+
+```bash
+main.c -> main.o
+```
+
+Esto automatiza dependencias.
+
+---
+
+#### `.PHONY`
+
+```make
+.PHONY: all run clean help rebuild
+```
+
+Indica objetivos que no representan archivos físicos.
+
+Esto evita conflictos si existe un archivo con el mismo nombre.
+
+---
+
+#### `all`
+
+```make
+all: $(TARGET)
+```
+
+Objetivo principal.
+
+Al ejecutar:
+
+```bash
+make
+```
+
+se compila el proyecto completo.
+
+---
+
+#### `help`
+
+```make
+help:
+```
+
+Muestra comandos disponibles:
+
+```bash
+make help
+```
+
+Salida:
+
+```bash
+Objetivos disponibles:
+  make
+  make run
+  make clean
+  make rebuild
+```
+
+Mejora usabilidad.
+
+---
+
+#### Regla patrón `%.o: %.c`
+
+```make
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+```
+
+Automatiza compilación de `.c` a `.o`.
+
+Ejemplo:
+
+```bash
+main.c -> main.o
+```
+
+Elementos:
+
+- `$<` = archivo fuente
+- `$@` = archivo destino
+
+---
+
+#### Construcción del ejecutable
+
+```make
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $@
+```
+
+Une archivos objeto para crear el programa final.
+
+Ejemplo:
+
+```bash
+gcc -Wall -Wextra -O2 main.o -o hola
+```
+
+---
+
+#### `run`
+
+```make
+run: $(TARGET)
+	./$(TARGET)
+```
+
+Compila (si es necesario) y ejecuta:
+
+```bash
+make run
+```
+
+---
+
+#### `clean`
+
+```make
+clean:
+	rm -f $(OBJS) $(TARGET)
+```
+
+Elimina archivos generados:
+
+- `.o`
+- ejecutable
+
+Comando:
+
+```bash
+make clean
+```
+
+---
+
+#### `rebuild`
+
+```make
+rebuild: clean all
+```
+
+Hace limpieza y recompilación completa.
+
+Comando:
+
+```bash
+make rebuild
+```
+
+---
+
+## Resultados obtenidos
+
+### Compilación
+
+Comando:
+
+```bash
+mingw32-make
+```
+
+Salida:
+
+```bash
+gcc -Wall -Wextra -O2 -c main.c -o main.o
+gcc -Wall -Wextra -O2 main.o -o hola
+```
+
+---
+
+### Ejecución
+
+Comando:
+
+```bash
+mingw32-make run
+```
+
+Salida:
+
+```bash
+Hola desde un ejemplo basico de Makefile.
+Este programa fue compilado y ejecutado con make.
+```
+
+---
+
+### Limpieza
+
+Comando:
+
+```bash
+mingw32-make clean
+```
+
+Salida:
+
+```bash
+rm -f main.o hola
+```
+
+---
+
+## Contribución a la automatización
+
+Este Makefile permite:
+
+- Compilar automáticamente.
+- Crear archivos objeto.
+- Enlazar ejecutables.
+- Ejecutar el programa.
+- Limpiar archivos temporales.
+- Recompilar desde cero.
+- Estandarizar flujo de trabajo.
+
+La automatización reduce errores humanos, mejora mantenimiento y facilita trabajo colaborativo.
 # 6. Funcionamiento del Makefile
 
 ## Código del Makefile
