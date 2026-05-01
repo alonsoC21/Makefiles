@@ -1,0 +1,15 @@
+# Ejecutables
+bin/
+
+# Archivos objeto
+*.o
+*.out
+*.exe
+
+# Configuración del editor
+.vscode/
+.idea/
+
+# Archivos temporales
+*.tmp
+*.log
