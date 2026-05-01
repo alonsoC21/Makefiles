@@ -49,8 +49,8 @@ calculadora-makefile/
 ├── bin/
 │
 ├── Makefile
-├── README.md
-└── .gitignore
+README.md
+.gitignore
 ```
 
 ## Descripción de carpetas
