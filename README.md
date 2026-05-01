@@ -83,19 +83,8 @@ README.md
 - GCC
 - Make o MinGW32-Make
 - Git
-
-## Verificar instalación
-
-```bash
-gcc --version
-mingw32-make --version
-git --version
-```
-
----
----
-
-#Análisis del Makefile de ejemplo
+  
+# 6. Análisis del Makefile de ejemplo
 
 Como parte de la actividad se reprodujo el ejercicio base proporcionado en clase, el cual consiste en un programa en C con un Makefile que automatiza compilación, ejecución y limpieza.
 
@@ -445,6 +434,17 @@ Este Makefile permite:
 - Estandarizar flujo de trabajo.
 
 La automatización reduce errores humanos, mejora mantenimiento y facilita trabajo colaborativo.
+## Verificar instalación
+
+```bash
+gcc --version
+mingw32-make --version
+git --version
+```
+
+---
+---
+
 # 6. Funcionamiento del Makefile
 
 ## Código del Makefile
