@@ -382,9 +382,9 @@ mingw32-make
 Salida:
 
 ```bash
-gcc -Wall -Wextra -O2 -c main.c -o main.o
 gcc -Wall -Wextra -O2 main.o -o hola
 ```
+<img width="494" height="46" alt="image" src="https://github.com/user-attachments/assets/6a858362-3a37-45e0-b9f1-8903bae4490b" />
 
 ---
 
@@ -402,6 +402,7 @@ Salida:
 Hola desde un ejemplo basico de Makefile.
 Este programa fue compilado y ejecutado con make.
 ```
+<img width="533" height="106" alt="image" src="https://github.com/user-attachments/assets/6def7e16-d4eb-4ea3-9778-84978f24208a" />
 
 ---
 
@@ -445,7 +446,7 @@ git --version
 ---
 ---
 
-# 6. Funcionamiento del Makefile
+# 7. Funcionamiento del Makefile
 
 ## Código del Makefile
 
@@ -480,7 +481,7 @@ clean:
 
 ---
 
-# 7. Instrucciones de uso
+# 8. Instrucciones de uso
 
 ## Compilar
 
@@ -502,7 +503,7 @@ mingw32-make clean
 
 ---
 
-# 8. Resultados obtenidos
+# 9. Resultados obtenidos
 
 Al ejecutar:
 
@@ -539,7 +540,7 @@ Esto demuestra que el Makefile automatiza la compilación y ejecución.
 
 ---
 
-# 9. Uso del archivo .gitignore
+# 10. Uso del archivo .gitignore
 
 El archivo `.gitignore` evita subir archivos innecesarios al repositorio.
 
@@ -564,10 +565,6 @@ bin/
 - Mejora colaboración.
 
 ---
-
-# 10. Repositorio Git
-
-El proyecto se administra mediante Git y GitHub.
 
 # 11. Conclusiones
 
