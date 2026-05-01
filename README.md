@@ -165,6 +165,8 @@ Se obtuvo:
 mkdir -p bin
 gcc src/main.c src/operaciones.c -Iinclude -o bin/calculadora
 ```
+<img width="602" height="65" alt="image" src="https://github.com/user-attachments/assets/24e8e6b7-41af-402c-97c7-31f958cf66fc" />
+
 
 Al ejecutar:
 
@@ -180,6 +182,7 @@ Resta: 5
 Multiplicacion: 50
 Division: 2
 ```
+<img width="688" height="113" alt="image" src="https://github.com/user-attachments/assets/7d3dff5a-6adc-476d-8331-a02cd7d2fcbc" />
 
 Esto demuestra que el Makefile automatiza la compilación y ejecución.
 
